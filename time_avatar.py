@@ -21,7 +21,7 @@ def main():
     user = api.login(u, p)
     STORE['user'] = user
 
-    print('starting execute job...')
+    print('starting...')
 
     scheduler = BlockingScheduler()
     now = datetime.now()
