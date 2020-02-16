@@ -1,10 +1,7 @@
 import requests
 import random
-import pytesseract
-from PIL import Image
-from requests.cookies import RequestsCookieJar
-from helper import get_request_hash, get_app_token
-from models import User
+from .helper import get_request_hash, get_app_token
+from .models import User
 
 
 def login(u: str, p: str) -> User:
@@ -37,18 +34,16 @@ def login(u: str, p: str) -> User:
     }
     res = requests.post(url, data, headers=headers, cookies=res.cookies)
 
-    print(res.text)
-
     return User(**res.cookies.get_dict())
 
 
-def upload_avatar(user: User, image_path: str) -> bool:
+def upload_avatar(user: User, image) -> bool:
     """
     上传头像
 
     Args:
         user: 用户对象
-        image_path: 图片路径
+        image: 图片路径 或 字节数据
 
     Returns:
         bool: 上传成功返回 True
@@ -62,8 +57,11 @@ def upload_avatar(user: User, image_path: str) -> bool:
         'X-App-Token': get_app_token()
     }
 
+    if isinstance(image, str):
+        image = open(image, 'rb')
+
     files = {
-        'imgFile': (str(random.random()), open(image_path, 'rb'), 'image/jpeg')
+        'imgFile': (str(random.random()), image, 'image/jpeg')
     }
     res = requests.post(url, headers=headers, cookies=user.__dict__, files=files)
 
