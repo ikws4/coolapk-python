@@ -2,3 +2,4 @@
 */__pycache__/*
 /api/test.py
 */.DS_Store
+.ropeproject/
