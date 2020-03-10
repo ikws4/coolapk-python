@@ -1,7 +1,7 @@
 import requests
 import random
 from .helper import get_request_hash, get_app_token
-from .models import User, Banner
+from .models import User
 
 
 def _base_post(url, **kwargs):

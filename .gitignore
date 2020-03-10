@@ -3,3 +3,5 @@
 /api/test.py
 */.DS_Store
 .ropeproject/
+
+.vscode/
