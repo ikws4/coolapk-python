@@ -57,7 +57,7 @@ def login(u, p):
     return User(**res.cookies.get_dict())
 
 
-def upload_avatar(uses, image):
+def upload_avatar(user, image):
     """上传头像
 
     Args:
